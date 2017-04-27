@@ -1,17 +1,22 @@
-var override = require("koa-override-method");
+'use strict';
 
-/**
-  inspired by express method override
-  this.request.original_method - hold the original method
-  this.method - new method
-*/
 
-module.exports = function (){
-  return function * (next){
-    var body = this.request.body;
-    this.request.original_method = this.method;
-    this.request.method = override.call(this, body);
+const override = function(){
 
-    yield* next;
+  return async (ctx, next) => {
+    const body = ctx.request.body; 
+    if(!body) ctx.throw('Override called before body parser', 500);
+    
+    const originalMethod = ctx.method  || "GET";
+    const newMethod = ctx.request.body._method || ctx.method;
+
+    ctx.request.method = newMethod.toUpperCase();
+    ctx.request.original_method = originalMethod;
+
+    return next();
   }
-};
+
+}
+
+
+module.exports = override;

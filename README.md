@@ -1,14 +1,12 @@
 
-*Inspired by express method override*
+## Inspired by express method override
 
-**usage:**
+**Usage**
 ```
-var method_override = require("koa_method_override")
+const method_override = require("koa-methodoverride")
 app.use(method_override());
 ```
 
-*this will create*
-```
- this.request.original_method // hold the original method
- this.method // new method
-```
+## Access method
+* this.request.original_method
+*  this.request.method

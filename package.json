@@ -5,7 +5,5 @@
   "main": "index.js",
   "author": "ginad",
   "license": "ISC",
-  "dependencies": {
-    "koa-override-method": "^1.0.0"
-  }
+  "dependencies": {}
 }
